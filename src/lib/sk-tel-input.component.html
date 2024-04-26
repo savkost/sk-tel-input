@@ -1,0 +1,32 @@
+<!-- MAIN INPUT ROW -->
+<ion-row class="skInputRow" [style.border-radius]="totalSkTelInputBorderRadius +'px'" [style.background]="totalBackgroundHexColor" [style.border]="'2px solid' + borderHexColor">
+
+  <!-- COUNTRY CODE SELECTOR -->
+  <app-country-selector
+    [defaultSelectedCountryISO]="initialSelectedCountryISO"
+    [caseCodeSelectorTriggerID]="caseCodeSelectorTriggerID"
+    [preferredCountriesISOList]="preferredCountriesISOList"
+    [presentSearchBarCountries]="presentSearchBarCountries"
+    [selectedCountryByPhoneCode]="selectedCountryByPhoneCode"
+    [selectorBackgroundHexColor]="selectorBackgroundHexColor"
+    [arrowIconHexColor]="arrowIconHexColor"
+    [checkedCountryIconHexColor]="checkedCountryIconHexColor"
+    [dividerPreferredCountriesColor]="dividerPreferredCountriesColor"
+    [textInputHexColor]="textInputHexColor"
+    [readOnlyInput]="readOnlyInput"
+    [placeholderSearchCountriesInput]="placeholderSearchCountriesInput"
+    [dividerSearchInputCountriesColor]="dividerSearchInputCountriesColor"
+    (selectedCountryCodeEmitter)="handleSelectedCountryCode($event)">
+  </app-country-selector>
+
+  <!-- SELECTED COUNTRY CODE LABEL -->
+  <ion-label *ngIf="helper.checkUndefinedNull(selectedCountryCode)" class="greyCountryCodelabel">(+{{selectedCountryCode.dialCode}})</ion-label>
+
+  <!-- INPUT TEL -->
+  <ion-input type="tel" [(ngModel)]="inputContents" [placeholder]="placeholderInput" [style.color]="textInputHexColor" [style.caret-color]="caretColorInput"
+    [style.background]="inputBackgroundHexColor" [style.border-bottom]="!validateInputPattern()? '2px solid' + borderWrongPatternHexColor : ''"
+    (ionInput)="emitInputContent()" [readonly]="readOnlyInput" class="mainInput" (keypress)="fixTypeNumbersOnly($event)" (keyup.enter)="emitEnterPressed()">
+  </ion-input>
+</ion-row>
+
+

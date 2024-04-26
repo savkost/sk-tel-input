@@ -1,0 +1,104 @@
+.popoverCountryCodes {
+  --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --background: #FFFFFF;
+  --width: 430px;
+  --height: 250px !important;
+}
+
+.optionGrid {
+  background: #FFFFFF;
+}
+
+.preferredCountriesGrid {
+  background: #FFFFFF;
+}
+
+.optionIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.blackLabelOption {
+  color: #212121;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+.optionRowPopover {
+  margin: 2% auto;
+  border-radius: 12px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.optionRowPopover:hover {
+  background: #F0F8FF;
+}
+
+.basicSelectorDiv {
+  border-radius: 8px 0px 0px 8px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.countryIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.selectorIcon {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.selectedCountryIcon {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.rotate180deg {
+  transform: rotate(-180deg);
+}
+
+.searchCountriesInput {
+  font-size: 16px;
+  caret-color: #212121;
+  --highlight-color: transparent !important;
+  width: 85%;
+}
+
+.searchCountriesRow {
+  width: 98%;
+  border-radius: 12px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.searchCountriesIcon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.disableClickEventsCountrySelector {
+  pointer-events: none;
+  cursor: none;
+}
+
+.mainColDisplayFlex {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 450px) {
+  .popoverCountryCodes {
+    --width: 300px !important;
+  }
+}

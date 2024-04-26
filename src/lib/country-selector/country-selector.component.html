@@ -1,0 +1,45 @@
+
+<!-- COUNTRY CODE DIV SELECTOR -->
+<div class="basicSelectorDiv" [ngClass]="readOnlyInput? 'disableClickEventsCountrySelector' : ''" [id]="caseCodeSelectorTriggerID" [style.background]="selectorBackgroundHexColor" *ngIf="helper.checkUndefinedNull(selectedCountryCode) && loadedAllData">
+  <ion-img [src]="selectedCountryCode.srcIcon" class="countryIcon"></ion-img>
+  <ion-icon name="chevron-down-outline" class="selectorIcon" [ngClass]="isOpened? 'rotate180deg' : ''" [style.color]="arrowIconHexColor"></ion-icon>
+</div>
+
+<!-- RESPONSIBLE POPOVER FOR COUNTRY CODE SELECTION -->
+<ion-popover *ngIf="loadedAllData" [trigger]="caseCodeSelectorTriggerID" [id]="'popover_countries_' + caseCodeSelectorTriggerID" mode="ios" class="popoverCountryCodes" arrow="false" [backdropDismiss]="true" (didPresent)="isOpened = true" (didDismiss)="isOpened = false">
+  <ng-template>
+    <ion-content>
+
+      <!-- SEARCH LOCALLY AND FILTER COUNTRIES -->
+      <ion-grid *ngIf="helper.checkUndefinedNull(presentSearchBarCountries) && presentSearchBarCountries" class="preferredCountriesGrid" [style.border-bottom]="'2px solid' + dividerSearchInputCountriesColor">
+        <ion-row class="searchCountriesRow">
+          <ion-icon name="search-outline" class="searchCountriesIcon" [style.color]="checkedCountryIconHexColor"></ion-icon>
+          <ion-input [(ngModel)]="searchCountriesText" [placeholder]="placeholderSearchCountriesInput" [style.color]="textInputHexColor"
+            (ionInput)="searchLocallyCountries()" class="searchCountriesInput" type="text">
+          </ion-input>
+        </ion-row>
+      </ion-grid>
+
+      <!-- PREFERRED COUNTRIES -->
+      <ion-grid *ngIf="helper.checkUndefinedNull(preferredCountriesList) && preferredCountriesList.length > 0" class="preferredCountriesGrid" [style.border-bottom]="'2px solid' + dividerPreferredCountriesColor">
+        <ion-row *ngFor="let prefCountry of preferredCountriesList" (click)="selectCountryCode(prefCountry)" class="optionRowPopover">
+          <ion-col class="ion-no-padding mainColDisplayFlex">
+            <ion-img [src]="prefCountry.srcIcon" class="optionIcon"></ion-img>
+            <ion-label class="blackLabelOption">{{prefCountry.name}} (+{{prefCountry.dialCode}})</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- ALL COUNTRY CODES -->
+      <ion-grid class="optionGrid">
+        <ion-row *ngFor="let countryCode of countriesList" (click)="selectCountryCode(countryCode)" class="optionRowPopover">
+          <ion-col class="ion-no-padding mainColDisplayFlex">
+            <ion-img [src]="countryCode.srcIcon" class="optionIcon"></ion-img>
+            <ion-label class="blackLabelOption">{{countryCode.name}} (+{{countryCode.dialCode}})</ion-label>
+            <ion-icon name="checkmark-outline" *ngIf="countryCode.isSelected" class="selectedCountryIcon" [style.color]="checkedCountryIconHexColor"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-popover>

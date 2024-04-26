@@ -1,0 +1,18 @@
+.skInputRow {
+  width: 100%;
+  align-items: center;
+}
+
+.mainInput {
+  font-size: 16px;
+  caret-color: #212121;
+  --highlight-color: transparent !important;
+  width: calc(100% - 170px);
+  font-weight: bold;
+}
+
+.greyCountryCodelabel {
+  font-size: 14px;
+  color: #707070;
+  margin: 0 10px;
+}
