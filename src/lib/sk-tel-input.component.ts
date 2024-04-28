@@ -11,28 +11,28 @@ import { SkTelInputService } from './sk-tel-input.service';
 export class SkTelInputComponent {
 
   // GENERAL INPUTS
-  @Input() totalBackgroundHexColor: string;
-  @Input() inputBackgroundHexColor: string;
-  @Input() selectorBackgroundHexColor: string;
-  @Input() borderHexColor: string;
-  @Input() arrowIconHexColor: string;
-  @Input() checkedCountryIconHexColor: string;
-  @Input() dividerPreferredCountriesColor: string;
-  @Input() inputContents: string;
-  @Input() readOnlyInput: boolean;
-  @Input() placeholderInput: string;
-  @Input() textInputHexColor: string;
+  @Input() totalBackgroundHexColor: string = '#FFF';
+  @Input() inputBackgroundHexColor: string = '#FFF';
+  @Input() selectorBackgroundHexColor: string = '#F1F7FE';
+  @Input() borderHexColor: string = '#F1F7FE';
+  @Input() arrowIconHexColor: string = '#7904FF';
+  @Input() checkedCountryIconHexColor: string = '#7904FF';
+  @Input() dividerPreferredCountriesColor: string = '#F1F7FE';
+  @Input() inputContents: string = '';
+  @Input() readOnlyInput: boolean = false;
+  @Input() placeholderInput: string = '';
+  @Input() textInputHexColor: string = '#212121';
   @Input() caseCodeSelectorTriggerID: string;
-  @Input() placeholderSearchCountriesInput: string;
-  @Input() dividerSearchInputCountriesColor: string;
+  @Input() placeholderSearchCountriesInput: string = '';
+  @Input() dividerSearchInputCountriesColor: string = '#F1F7FE';
   @Input() caretColorInput: string = '#212121';
   @Input() totalSkTelInputBorderRadius: number = 12;
 
   // COUNTRY SELECTOR INPUTS
   @Input() initialSelectedCountryISO: string;
   @Input() preferredCountriesISOList: string[];
-  @Input() presentSearchBarCountries: boolean;
-  @Input() selectedCountryByPhoneCode: string;
+  @Input() presentSearchBarCountries: boolean = true;
+  @Input() selectedCountryByPhoneCode: string = '';
   @Input() patternMobile: string;
   @Input() borderWrongPatternHexColor: string;
 
@@ -50,6 +50,13 @@ export class SkTelInputComponent {
     // Check and set the read-only input
     if (!this.helper.checkUndefinedNull(this.readOnlyInput)){
       this.readOnlyInput = false;
+    }
+
+    // Check and set the caseCodeSelectorTriggerID in a random way
+    if (!this.helper.checkNecessaryCases(this.caseCodeSelectorTriggerID)){
+
+      // Create a random string of 10 characters
+      this.caseCodeSelectorTriggerID = this.createRandomString(10);
     }
 
     // Check the pattern and set default borderWrongPatternHexColor
@@ -110,5 +117,21 @@ export class SkTelInputComponent {
     }
 
     return true;
+  }
+
+  // This method creates a random string of the requested size
+  createRandomString(requestedSize: number): string {
+
+    // Initializations
+    const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_';
+    let result = '';
+
+    // Create a random string
+    for (let i = 0; i < requestedSize; i++) {
+      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+
+    // Return the generated random string
+    return result;
   }
 }
